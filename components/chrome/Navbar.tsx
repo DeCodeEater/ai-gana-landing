@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/lib/config";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
@@ -21,10 +22,10 @@ export const Navbar: React.FC = () => {
     <header className="sticky top-0 z-40 bg-bg/85 backdrop-blur-md border-b border-border transition-all">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo area - Circular avatar + AI GANA & subtitle */}
-        <a href="/" aria-label="AI GANA Home" className="flex items-center gap-3">
+        <Link href="/" aria-label="AI GANA Home" className="flex items-center gap-3">
           <div className="relative w-10 h-10 rounded-full overflow-hidden border border-border shrink-0 shadow-sm">
             <Image
-              src="/images/ai_gana_portrait.png"
+              src="/images/me.png"
               alt={siteConfig.agentName}
               fill
               sizes="40px"
@@ -39,7 +40,7 @@ export const Navbar: React.FC = () => {
               {siteConfig.role}
             </span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Links */}
         <nav className="hidden md:flex items-center gap-8">
