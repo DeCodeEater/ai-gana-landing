@@ -1,0 +1,46 @@
+[
+  {
+    "id": "prop-1",
+    "title": "Modern 4-Bedroom Villa in Maitama",
+    "price": "₦350,000,000",
+    "location": "Maitama, Abuja",
+    "bedrooms": 4,
+    "bathrooms": 5,
+    "type": "house",
+    "imageUrl": "/images/property_maitama.png",
+    "whatsappMessage": "Hi AI GANA, I saw the 4-bedroom villa in Maitama on your site and I'd like to know more."
+  },
+  {
+    "id": "prop-2",
+    "title": "Contemporary 3-Bedroom Apartment",
+    "price": "₦120,000,000",
+    "location": "Wuse 2, Abuja",
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "type": "apartment",
+    "imageUrl": "/images/property_wuse.png",
+    "whatsappMessage": "Hi AI GANA, I'm interested in the 3-bedroom apartment in Wuse 2 and would love to see details."
+  },
+  {
+    "id": "prop-3",
+    "title": "Lakeview Terrace Penthouse",
+    "price": "₦210,000,000",
+    "location": "Jabi, Abuja",
+    "bedrooms": 3,
+    "bathrooms": 4,
+    "type": "apartment",
+    "imageUrl": "/images/property_jabi.png",
+    "whatsappMessage": "Hi AI GANA, I saw the Jabi Lake penthouse on your page and would like to ask a few questions."
+  },
+  {
+    "id": "prop-4",
+    "title": "Executive 5-Bedroom Duplex",
+    "price": "₦480,000,000",
+    "location": "Asokoro, Abuja",
+    "bedrooms": 5,
+    "bathrooms": 6,
+    "type": "house",
+    "imageUrl": "/images/property_asokoro.png",
+    "whatsappMessage": "Hi AI GANA, I saw the executive duplex in Asokoro on your site and would like to schedule a quick chat."
+  }
+]
