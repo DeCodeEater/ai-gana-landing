@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #FAF7F2;
+  --color-surface: #FFFFFF;
+  --color-ink: #1C1A17;
+  --color-ink-soft: #6E665C;
+  --color-border: #E8E1D6;
+  --color-accent: #1F7A5C;
+  --color-accent-hover: #18604A;
+  --color-accent-soft: #E7F3EE;
+
+  --font-display: var(--font-jakarta), sans-serif;
+  --font-body: var(--font-inter), sans-serif;
+
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-full: 9999px;
+
+  --shadow-resting: 0 2px 12px rgba(28, 26, 23, 0.06);
+  --shadow-hover: 0 12px 28px rgba(28, 26, 23, 0.12);
+  --shadow-cta: 0 8px 20px rgba(31, 122, 92, 0.25);
+
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --background: #FAF7F2;
+  --foreground: #1C1A17;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
+
+/* Opacity-only 2s slow pulse for calm live indicator ("breathing, not bouncing") */
+@keyframes opacityPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.animate-pulse-slow {
+  animation: opacityPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
