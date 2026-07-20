@@ -9,6 +9,8 @@ export interface Property {
   bedrooms: number;
   bathrooms: number;
   type: "apartment" | "house" | "land" | "commercial";
+  purpose: "rent" | "sale";
+  opinion?: string;
   imageUrl: string;
   whatsappMessage: string;
 }

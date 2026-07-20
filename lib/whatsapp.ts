@@ -9,7 +9,8 @@ export function buildWhatsAppLink(message?: string): string {
 
 export function trackWhatsAppClick(source: string) {
   if (typeof window !== "undefined" && "gtag" in window) {
-    (window as Window & typeof globalThis & { gtag?: (command: string, action: string, params: Record<string, string>) => void }).gtag?.("event", "whatsapp_click", {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).gtag?.("event", "whatsapp_click", {
       event_category: "conversion",
       event_label: source,
       source: source,

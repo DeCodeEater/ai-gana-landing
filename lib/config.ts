@@ -20,32 +20,77 @@ export interface SiteConfig {
     calloutTitle: string;
     calloutBody: string;
   };
+  socialLinks: {
+    facebook: string;
+    instagram: string;
+    tiktok: string;
+  };
+  howIWork: {
+    badge: string;
+    subtitle: string;
+    philosophyQuote: string;
+    philosophySubtext: string;
+    oldWayTitle: string;
+    oldWayBullets: string[];
+    myWayTitle: string;
+    expectations: string[];
+    ctaTitle: string;
+    ctaSubtext: string;
+    ctaButtonText: string;
+  };
 }
 
 export const siteConfig: SiteConfig = {
   agentName: "AI GANA",
   fullName: "Abdullahi Idris Gana",
-  role: "Real Estate Consultant . Abuja",
+  role: "Real Estate Agent . Abuja",
   tagline: "I help people find homes and investment opportunities in Abuja without making the process stressful.",
   heroGreeting: "👋 Hi, I'm Abdullahi Idris Gana.",
   heroSubtext: "Most people know me as AI GANA.",
   heroQuote: "My goal isn't to sell you the most expensive property. It's to help you make a decision you'll be happy with.",
   heroTagline: "Whether you're renting your first apartment, upgrading to a bigger home, or looking for your next investment, I'll help you find the right property without pressure, confusion, or endless back and forth.",
-  whatsappNumber: "2348030000000",
-  phone: "+234 803 000 0000",
-  email: "hello@aigana.com",
+  whatsappNumber: "2348149912055",
+  phone: "+234 814 991 2055",
+  email: "Abduallahi.Idris.gana@gmail.com",
   officeLocation: "Abuja, Nigeria",
   companyName: "AI GANA Real Estate",
   responseTime: "Usually replies within an hour",
-  friendlyNote: "Happy to answer questions even if you're just exploring.",
+  friendlyNote: "Even if you're just exploring your options, I'm happy to point you in the right direction.",
+  socialLinks: {
+    facebook: "https://facebook.com",
+    instagram: "https://instagram.com",
+    tiktok: "https://tiktok.com",
+  },
   originStory: {
-    title: "Clear guidance, honest advice.",
+    title: "I believe real estate should feel simple.",
     body: [
-      "Navigating real estate in Abuja can often feel overwhelming — with endless calls, unclear pricing, and brokers pushing whatever listing is on their desk.",
-      "I take a different approach. I work directly with clients to understand what they actually need — whether that's a family home in Wuse 2, a long-term investment property in Maitama, or simply understanding land values before making a move.",
-      "When you send a message, you get direct answers from me. If a property isn't a good fit or the asking price doesn't make sense, I'll tell you straight up."
+      "Finding the right property in Abuja can feel overwhelming. Too many calls. Too many opinions. Too much pressure.",
+      "That's not how I work.",
+      "I start by understanding what you're actually looking for, whether that's your first apartment, your family home, or your next investment.",
+      "If I think a property isn't right for you, I'll tell you. I'd rather earn your trust than make a quick sale."
     ],
-    calloutTitle: "People often ask... Why \"AI GANA\"?",
-    calloutBody: "AI GANA comes from my name, Abdullahi Idris Gana. It started as a simple abbreviation, but today it represents how I approach my work: clear communication, honest advice, and helping people make confident decisions. Whether you're searching for your next home or your next investment, my goal is to make the journey simpler and more enjoyable."
+    calloutTitle: "Why \"AI GANA\"?",
+    calloutBody: "AI GANA comes from my name, Abdullahi Idris Gana. Over time, it became more than an abbreviation. To me, it means showing up prepared, communicating clearly, and helping people make confident property decisions. That's the standard I try to live up to every time someone messages me."
+  },
+  howIWork: {
+    badge: "What It's Like Working With Me",
+    subtitle: "Clear guidance. Honest advice. Better property decisions.",
+    philosophyQuote: "Before I recommend a property, I try to understand the person.",
+    philosophySubtext: "Buying or renting property in Abuja shouldn't feel exhausting.",
+    oldWayTitle: "The Usual Experience",
+    oldWayBullets: [
+      "Endless calls & pushy follow-ups",
+      "Conflicting advice & hidden details",
+      "Pressure to make quick decisions"
+    ],
+    myWayTitle: "Working With AI GANA",
+    expectations: [
+      "I'll tell you when a property isn't worth your money.",
+      "You'll always know where things stand.",
+      "I'll never pressure you into buying."
+    ],
+    ctaTitle: "Tell me what you're looking for.",
+    ctaSubtext: "Even if you're just exploring options, I'm happy to point you in the right direction.",
+    ctaButtonText: "Chat with AI GANA"
   }
 };

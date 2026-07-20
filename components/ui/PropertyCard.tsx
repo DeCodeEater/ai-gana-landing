@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Bed, Bath, MapPin } from "lucide-react";
 import { Property } from "@/lib/data";
 import { WhatsAppButton } from "./WhatsAppButton";
-import { motion, AnimatePresence } from "motion/react";
 
 interface PropertyCardProps {
   property: Property;
@@ -15,74 +14,76 @@ interface PropertyCardProps {
 export const PropertyCard: React.FC<PropertyCardProps> = ({ property, isActive = true }) => {
   return (
     <div className={`group bg-surface rounded-2xl sm:rounded-3xl border border-border overflow-hidden transition-all duration-300 flex flex-col h-full ${isActive ? 'shadow-hover' : 'shadow-resting'}`}>
-      <div className={`relative w-full overflow-hidden bg-bg transition-all duration-300 ${isActive ? 'h-64 sm:h-72' : 'h-48 sm:h-56'}`}>
-        <Image
-          src={property.imageUrl}
-          alt={property.title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover group-hover:scale-105 transition-transform duration-500 ease-premium"
-        />
-        <div className="absolute top-4 left-4 bg-ink/85 backdrop-blur-md text-white text-xs font-medium px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
-          <MapPin className="w-3.5 h-3.5 text-accent-soft" />
-          <span>{property.location}</span>
-        </div>
+      {/* Image — fills entire card when inactive, fixed ratio when active */}
+      <div className={`relative w-full overflow-hidden bg-bg ${isActive ? '' : 'flex-1'}`}>
+        {isActive ? (
+          /* Active: 3:2 aspect ratio — image-dominant */
+          <div className="relative w-full aspect-[3/2]">
+            <Image
+              src={property.imageUrl}
+              alt={property.title}
+              fill
+              sizes="(max-width: 768px) 82vw, 400px"
+              className="object-cover"
+            />
+          </div>
+        ) : (
+          /* Inactive: image fills entire card, no text */
+          <Image
+            src={property.imageUrl}
+            alt={property.title}
+            fill
+            sizes="(max-width: 768px) 40vw, 200px"
+            className="object-cover"
+          />
+        )}
+        {/* Location badge — only on active card */}
+        {isActive && (
+          <div className="absolute top-3 left-3 bg-ink/80 backdrop-blur-md text-white text-xs font-medium px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+            <MapPin className="w-3 h-3 text-accent-soft" />
+            <span>{property.location}</span>
+          </div>
+        )}
       </div>
 
-      <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between gap-4">
-        <div>
-          <h3 className="font-display font-semibold text-lg sm:text-xl text-ink leading-snug group-hover:text-accent transition-colors line-clamp-2">
-            {property.title}
-          </h3>
-          <p className="font-display font-bold text-xl sm:text-2xl text-ink mt-2">
-            {property.price}
-          </p>
-
-          <AnimatePresence>
-            {isActive && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden"
-              >
-                <div className="flex items-center gap-5 text-sm text-ink-soft mt-4 pt-4 border-t border-border">
-                  <div className="flex items-center gap-1.5">
-                    <Bed className="w-4 h-4 text-ink-soft" />
-                    <span>{property.bedrooms} Beds</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Bath className="w-4 h-4 text-ink-soft" />
-                    <span>{property.bathrooms} Baths</span>
-                  </div>
-                </div>
-              </motion.div>
+      {/* Text content — only on active card, compact layout */}
+      {isActive && (
+        <div className="px-5 pt-4 pb-5 sm:px-6 sm:pt-5 sm:pb-6 flex flex-col gap-3 flex-1">
+          <div>
+            <h3 className="font-display font-semibold text-base sm:text-lg text-ink leading-snug line-clamp-1">
+              {property.title}
+            </h3>
+            {property.opinion && (
+              <p className="text-ink-soft text-sm italic mt-1.5 leading-relaxed">
+                {property.opinion}
+              </p>
             )}
-          </AnimatePresence>
-        </div>
+            <p className="font-display font-bold text-lg sm:text-xl text-ink mt-2">
+              {property.price}
+            </p>
+          </div>
 
-        <AnimatePresence>
-          {isActive && (
-            <motion.div
-              initial={{ opacity: 0, height: 0, marginTop: 0 }}
-              animate={{ opacity: 1, height: "auto", marginTop: 8 }}
-              exit={{ opacity: 0, height: 0, marginTop: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden"
-            >
-              <WhatsAppButton
-                message={property.whatsappMessage}
-                source={`property_${property.id}`}
-                variant="primary"
-                className="w-full justify-center shadow-cta"
-              >
-                Ask about this property
-              </WhatsAppButton>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+          <div className="flex items-center gap-4 text-xs sm:text-sm text-ink-soft pt-2 border-t border-border">
+            <div className="flex items-center gap-1.5">
+              <Bed className="w-3.5 h-3.5 text-ink-soft" />
+              <span>{property.bedrooms} Beds</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Bath className="w-3.5 h-3.5 text-ink-soft" />
+              <span>{property.bathrooms} Baths</span>
+            </div>
+          </div>
+
+          <WhatsAppButton
+            message={property.whatsappMessage}
+            source={`property_${property.id}`}
+            variant="primary"
+            className="w-full justify-center text-sm py-2.5 mt-3 sm:mt-4"
+          >
+            Ask me about this home
+          </WhatsAppButton>
+        </div>
+      )}
     </div>
   );
 };

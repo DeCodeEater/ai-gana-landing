@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Property } from "@/lib/data";
 import { SectionContainer } from "@/components/ui/SectionContainer";
 import { PropertyCard } from "@/components/ui/PropertyCard";
-import { Building2 } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface PropertiesProps {
@@ -12,163 +12,194 @@ interface PropertiesProps {
 }
 
 export const Properties: React.FC<PropertiesProps> = ({ properties }) => {
-  const [activeFilter, setActiveFilter] = useState<string>("all");
+  const [activeFilter, setActiveFilter] = useState<string>("sale");
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  const availableTypes = Array.from(new Set(properties.map((p) => p.type)));
-
-  const typeLabels: Record<string, string> = {
-    all: "All Properties",
-    apartment: "Apartments",
-    house: "Houses & Villas",
-    land: "Land",
-    commercial: "Commercial",
-  };
-
   const filterOptions = [
-    { label: "All Properties", value: "all" },
-    ...availableTypes.map((type) => ({
-      label: typeLabels[type] || type,
-      value: type,
-    })),
+    { label: "Sale Listings", value: "sale" },
+    { label: "Rental Listings", value: "rent" },
   ];
 
   const filteredProperties = properties.filter((item) => {
-    if (activeFilter === "all") return true;
-    return item.type === activeFilter;
+    return item.purpose === activeFilter;
   });
+
+  const handlePrev = () => {
+    if (activeIndex > 0) setActiveIndex((prev) => prev - 1);
+  };
+
+  const handleNext = () => {
+    if (activeIndex < filteredProperties.length - 1) setActiveIndex((prev) => prev + 1);
+  };
 
   return (
     <SectionContainer id="properties" surface={true}>
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
         <div>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent-soft text-accent text-xs font-semibold uppercase tracking-wider mb-3">
-            <Building2 className="w-3.5 h-3.5" />
-            Featured Listings
-          </div>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink tracking-tight">
             A Few Places You Might Like
           </h2>
           <p className="text-ink-soft mt-2 text-base sm:text-lg max-w-xl">
-            A snapshot of current opportunities available in Abuja. Tap any card to open a direct WhatsApp chat about that specific property.
+            A snapshot of current opportunities available in Abuja. Swipe or tap cards to explore, then tap WhatsApp to inquire.
           </p>
         </div>
 
-        {filterOptions.length > 2 && (
-          <div className="flex flex-wrap gap-2">
-            {filterOptions.map((option) => (
-              <button
-                key={option.value}
-                onClick={() => {
-                  setActiveFilter(option.value);
-                  setActiveIndex(0);
-                }}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer ${
-                  activeFilter === option.value
-                    ? "bg-accent text-white shadow-cta"
-                    : "bg-bg hover:bg-accent-soft text-ink-soft hover:text-accent border border-border"
-                }`}
-              >
-                {option.label}
-              </button>
-            ))}
+        {filterOptions.length > 1 && (
+          <div className="bg-bg border border-border p-1 rounded-full flex w-full md:w-fit relative">
+            {filterOptions.map((option) => {
+              const isActive = activeFilter === option.value;
+              return (
+                <button
+                  key={option.value}
+                  onClick={() => {
+                    setActiveFilter(option.value);
+                    setActiveIndex(0);
+                  }}
+                  className={`relative px-4 py-2 sm:px-6 rounded-full text-sm font-medium transition-colors duration-200 cursor-pointer flex-1 md:flex-initial text-center ${
+                    isActive ? "text-white" : "text-ink-soft hover:text-ink"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeFilterBg"
+                      className="absolute inset-0 bg-accent rounded-full shadow-cta"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{option.label}</span>
+                </button>
+              );
+            })}
           </div>
         )}
       </div>
 
-      <div className="relative w-full h-[550px] sm:h-[650px] flex items-center justify-center overflow-hidden touch-none px-4">
-        <AnimatePresence initial={false}>
-          {filteredProperties.map((property, idx) => {
-            const offset = idx - activeIndex;
-            const isActive = idx === activeIndex;
+      {/* Stacked Deck Carousel */}
+      <div className="relative w-full flex flex-col items-center">
+        {/* Card Stage */}
+        <div className="relative w-full h-[480px] sm:h-[500px] flex items-center justify-center overflow-hidden touch-pan-y">
+          <AnimatePresence initial={false}>
+            {filteredProperties.map((property, idx) => {
+              const offset = idx - activeIndex;
+              const isActive = idx === activeIndex;
 
-            let x = "0%";
-            let scale = 1;
-            let opacity = 1;
-            let zIndex = 10;
+              // Only render cards within visible range
+              if (Math.abs(offset) > 1) return null;
 
-            if (offset === 0) {
-              x = "0%";
-              scale = 1;
-              opacity = 1;
-              zIndex = 10;
-            } else if (offset === -1) {
-              x = "-65%";
-              scale = 0.85;
-              opacity = 0.3;
-              zIndex = 5;
-            } else if (offset === 1) {
-              x = "65%";
-              scale = 0.85;
-              opacity = 0.3;
-              zIndex = 5;
-            } else if (offset < -1) {
-              x = "-110%";
-              scale = 0.7;
-              opacity = 0;
-              zIndex = 0;
-            } else if (offset > 1) {
-              x = "110%";
-              scale = 0.7;
-              opacity = 0;
-              zIndex = 0;
-            }
+              let x = "0%";
+              let cardHeight = "100%";
+              let opacity = 1;
+              let zIndex = 20;
 
-            return (
-              <motion.div
-                key={property.id}
-                className="absolute w-full max-w-sm sm:max-w-md h-[480px] sm:h-[580px]"
-                initial={false}
-                animate={{
-                  x,
-                  scale,
-                  opacity,
-                  zIndex,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 280,
-                  damping: 28,
-                  mass: 0.9,
-                }}
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.4}
-                onDragEnd={(e, info) => {
-                  const swipeThreshold = 50;
-                  if (info.offset.x < -swipeThreshold && activeIndex < filteredProperties.length - 1) {
-                    setActiveIndex(activeIndex + 1);
-                  } else if (info.offset.x > swipeThreshold && activeIndex > 0) {
-                    setActiveIndex(activeIndex - 1);
-                  }
-                }}
-                onClick={() => {
-                  if (!isActive) {
-                    setActiveIndex(idx);
-                  }
-                }}
-              >
-                <div className={`w-full h-full ${!isActive && 'cursor-pointer'} ${!isActive ? 'pointer-events-none' : ''}`}>
-                  <PropertyCard property={property} isActive={isActive} />
-                </div>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </div>
+              if (offset === 0) {
+                // Current: centered, full height, on top
+                x = "0%";
+                cardHeight = "100%";
+                opacity = 1;
+                zIndex = 20;
+              } else if (offset === -1) {
+                // Previous: shifted left, shorter, behind, vertically centered
+                x = "-40%";
+                cardHeight = "72%";
+                opacity = 0.55;
+                zIndex = 10;
+              } else if (offset === 1) {
+                // Next: shifted right, shorter, behind, vertically centered
+                x = "40%";
+                cardHeight = "72%";
+                opacity = 0.55;
+                zIndex = 10;
+              }
 
-      {/* Pagination indicators */}
-      <div className="flex justify-center items-center gap-2 mt-6">
-        {filteredProperties.map((_, idx) => (
+              return (
+                <motion.div
+                  key={property.id}
+                  className="absolute w-[80%] max-w-[340px] sm:max-w-[380px]"
+                  style={{
+                    top: "50%",
+                    y: "-50%",
+                  }}
+                  initial={false}
+                  animate={{
+                    x,
+                    height: cardHeight,
+                    opacity,
+                    zIndex,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 26,
+                    mass: 0.8,
+                  }}
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.25}
+                  onDragEnd={(_e, info) => {
+                    const swipeThreshold = 40;
+                    if (info.offset.x < -swipeThreshold && activeIndex < filteredProperties.length - 1) {
+                      setActiveIndex(activeIndex + 1);
+                    } else if (info.offset.x > swipeThreshold && activeIndex > 0) {
+                      setActiveIndex(activeIndex - 1);
+                    }
+                  }}
+                  onClick={() => {
+                    if (!isActive) setActiveIndex(idx);
+                  }}
+                >
+                  <div className={`w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden ${!isActive ? "cursor-pointer" : ""}`}>
+                    <PropertyCard property={property} isActive={isActive} />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+
+        {/* Navigation Row: Arrows + Dots */}
+        <div className="flex items-center justify-center gap-6 mt-6">
+          {/* Left Arrow */}
           <button
-            key={idx}
-            onClick={() => setActiveIndex(idx)}
-            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-              idx === activeIndex ? "bg-accent scale-125" : "bg-border hover:bg-ink-soft"
+            onClick={handlePrev}
+            disabled={activeIndex === 0}
+            className={`p-2.5 rounded-full border border-border transition-all cursor-pointer ${
+              activeIndex === 0
+                ? "opacity-30 cursor-not-allowed bg-transparent"
+                : "bg-surface hover:bg-bg text-ink shadow-sm hover:shadow-md"
             }`}
-            aria-label={`Go to slide ${idx + 1}`}
-          />
-        ))}
+            aria-label="Previous property"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          {/* Dots */}
+          <div className="flex items-center gap-2">
+            {filteredProperties.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveIndex(idx)}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  idx === activeIndex ? "bg-accent scale-125" : "bg-border hover:bg-ink-soft"
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Right Arrow */}
+          <button
+            onClick={handleNext}
+            disabled={activeIndex === filteredProperties.length - 1}
+            className={`p-2.5 rounded-full border border-border transition-all cursor-pointer ${
+              activeIndex === filteredProperties.length - 1
+                ? "opacity-30 cursor-not-allowed bg-transparent"
+                : "bg-surface hover:bg-bg text-ink shadow-sm hover:shadow-md"
+            }`}
+            aria-label="Next property"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
       </div>
     </SectionContainer>
   );

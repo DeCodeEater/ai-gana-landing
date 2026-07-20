@@ -4,7 +4,7 @@ import "./globals.css";
 import { siteConfig } from "@/lib/config";
 import { Navbar } from "@/components/chrome/Navbar";
 import { Footer } from "@/components/chrome/Footer";
-import { FloatingWhatsAppButton } from "@/components/chrome/FloatingWhatsAppButton";
+import { StickyCtaBar } from "@/components/chrome/StickyCtaBar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,20 +20,20 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aigana.com"),
-  title: `${siteConfig.agentName} – Real Estate Consultant in Abuja | Find Homes & Rentals`,
+  title: `${siteConfig.agentName} – Real Estate Agent in Abuja | Find Homes & Rentals`,
   description: siteConfig.tagline,
   keywords: [
     "AI GANA",
     "Abdullahi Idris Gana",
-    "Abuja Real Estate Consultant",
+    "Abuja Real Estate Agent",
     "Maitama Properties",
     "Wuse Apartments",
     "Asokoro Villa",
     "Jabi Penthouse",
-    "Nigeria Real Estate Advisor",
+    "Nigeria Real Estate Agent",
   ],
   openGraph: {
-    title: `${siteConfig.agentName} – Real Estate Consultant in Abuja | Find Homes & Rentals`,
+    title: `${siteConfig.agentName} – Real Estate Agent in Abuja | Find Homes & Rentals`,
     description: siteConfig.tagline,
     url: "https://aigana.com",
     siteName: siteConfig.agentName,
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.agentName} – Real Estate Consultant in Abuja | Find Homes & Rentals`,
+    title: `${siteConfig.agentName} – Real Estate Agent in Abuja | Find Homes & Rentals`,
     description: siteConfig.tagline,
     images: ["/images/me.png"],
   },
@@ -91,7 +91,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />
-        <FloatingWhatsAppButton />
+        <StickyCtaBar />
       </body>
     </html>
   );

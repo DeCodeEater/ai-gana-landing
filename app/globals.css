@@ -45,3 +45,28 @@ body {
 .animate-pulse-slow {
   animation: opacityPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
+/* Accordion expand / collapse */
+@keyframes accordionOpen {
+  from { max-height: 0; opacity: 0; }
+  to   { max-height: 200px; opacity: 1; }
+}
+@keyframes accordionClose {
+  from { max-height: 200px; opacity: 1; }
+  to   { max-height: 0; opacity: 0; }
+}
+
+.accordion-open {
+  animation: accordionOpen 350ms var(--ease-premium) forwards;
+  overflow: hidden;
+}
+.accordion-closed {
+  animation: accordionClose 250ms var(--ease-premium) forwards;
+  overflow: hidden;
+}
+
+/* Safe-area bottom padding for sticky bar */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+

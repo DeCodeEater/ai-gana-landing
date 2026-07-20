@@ -86,7 +86,7 @@ export const Hero: React.FC = () => {
                   className="px-8 sm:px-10 py-3.5 sm:py-4 text-base sm:text-lg font-medium rounded-full justify-center w-full sm:w-auto shadow-cta hover:-translate-y-0.5 transition-transform"
                   containerClassName="w-full sm:w-auto"
                 >
-                  Let&apos;s Chat
+                  What are you looking for?
                 </WhatsAppButton>
                 {/* Reassurance */}
                 <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm text-ink-soft font-medium pl-0 sm:pl-4">
@@ -97,16 +97,9 @@ export const Hero: React.FC = () => {
                   {siteConfig.responseTime}
                 </div>
               </div>
-
-              <a
-                href="#properties"
-                className="inline-flex items-center justify-center font-bold text-ink hover:text-accent bg-transparent border-b-2 border-ink hover:border-accent pb-1 transition-colors uppercase tracking-widest text-xs sm:text-sm mb-6 sm:mb-0"
-              >
-                View Curated Properties
-              </a>
             </div>
 
-            <blockquote className="border-l-4 border-border pl-4 sm:pl-6 py-2 italic text-ink-soft font-normal text-base sm:text-lg lg:text-xl leading-relaxed max-w-xl lg:max-w-2xl mt-10 sm:mt-12">
+            <blockquote className="border-l-4 border-border pl-4 sm:pl-6 py-2 italic text-ink-soft font-normal text-base sm:text-lg lg:text-xl leading-relaxed max-w-xl lg:max-w-2xl mt-6 sm:mt-8">
               &ldquo;{siteConfig.heroQuote}&rdquo;
             </blockquote>
           </div>

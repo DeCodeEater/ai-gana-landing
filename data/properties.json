@@ -7,30 +7,36 @@
     "bedrooms": 4,
     "bathrooms": 5,
     "type": "house",
+    "purpose": "sale",
+    "opinion": "One of my favourite family homes in Maitama.",
     "imageUrl": "/images/property_maitama.png",
     "whatsappMessage": "Hi AI GANA, I saw the 4-bedroom villa in Maitama on your site and I'd like to know more."
   },
   {
     "id": "prop-2",
     "title": "Contemporary 3-Bedroom Apartment",
-    "price": "₦120,000,000",
+    "price": "₦12,000,000/year",
     "location": "Wuse 2, Abuja",
     "bedrooms": 3,
     "bathrooms": 3,
     "type": "apartment",
+    "purpose": "rent",
+    "opinion": "One of the best-value apartments I've seen this month.",
     "imageUrl": "/images/property_wuse.png",
-    "whatsappMessage": "Hi AI GANA, I'm interested in the 3-bedroom apartment in Wuse 2 and would love to see details."
+    "whatsappMessage": "Hi AI GANA, I'm interested in renting the 3-bedroom apartment in Wuse 2 and would love to see details."
   },
   {
     "id": "prop-3",
     "title": "Lakeview Terrace Penthouse",
-    "price": "₦210,000,000",
+    "price": "₦8,500,000/year",
     "location": "Jabi, Abuja",
     "bedrooms": 3,
     "bathrooms": 4,
     "type": "apartment",
+    "purpose": "rent",
+    "opinion": "If you want lake views and a quiet lifestyle, this is the one.",
     "imageUrl": "/images/property_jabi.png",
-    "whatsappMessage": "Hi AI GANA, I saw the Jabi Lake penthouse on your page and would like to ask a few questions."
+    "whatsappMessage": "Hi AI GANA, I saw the Jabi Lake penthouse for rent on your page and would like to ask a few questions."
   },
   {
     "id": "prop-4",
@@ -40,6 +46,8 @@
     "bedrooms": 5,
     "bathrooms": 6,
     "type": "house",
+    "purpose": "sale",
+    "opinion": "Great option if you want space and quiet surroundings.",
     "imageUrl": "/images/property_asokoro.png",
     "whatsappMessage": "Hi AI GANA, I saw the executive duplex in Asokoro on your site and would like to schedule a quick chat."
   }

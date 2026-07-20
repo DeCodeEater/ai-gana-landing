@@ -12,8 +12,7 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: "Properties", href: "#properties" },
-    { name: "About", href: "#about" },
-    { name: "Why Work With Me", href: "#why-me" },
+    { name: "How I Work", href: "#how-i-work" },
     { name: "Get to Know Me", href: "#get-to-know-me" },
     { name: "Contact", href: "#contact" },
   ];
@@ -74,7 +73,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Nav Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-surface border-b border-border px-4 pt-2 pb-6 space-y-4 shadow-hover animate-in slide-in-from-top-2">
+        <div className="md:hidden bg-surface border-b border-border px-4 pt-2 pb-6 space-y-4 shadow-hover transition-all duration-200 ease-out">
           <nav className="flex flex-col gap-3">
             {navLinks.map((link) => (
               <a
