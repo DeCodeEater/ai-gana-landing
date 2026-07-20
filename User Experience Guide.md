@@ -272,7 +272,7 @@ timeline
     2026-08-01 : Content finalisation & design specs
     2026-08-10 : Development of static landing page
     2026-08-20 : Internal QA and performance testing
-    2026-08-25 : Launch page on Vercel & link to GBP
+    2026-08-25 : Launch page on Netlify & link to GBP
     2026-09-01 : Begin A/B tests (headlines, CTAs, imagery)
     2026-09-15 : Review analytics; iterate content
     2026-09-30 : Add real testimonials/ratings and expand features
