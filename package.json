@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "tsx scripts/generate-static-data.ts && next build",
     "start": "next start",
     "lint": "eslint",
     "deploy": "npm run build && npx firebase deploy --only hosting"
