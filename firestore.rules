@@ -10,5 +10,8 @@ service cloud.firestore {
     match /leads/{leadId} {
       allow read, write, create: if true;
     }
+    match /site_settings/{document=**} {
+      allow read, write: if true;
+    }
   }
 }

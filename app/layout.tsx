@@ -3,6 +3,7 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/config";
 import { PublicLayout } from "@/components/chrome/PublicLayout";
+import { SiteConfigProvider } from "@/components/providers/SiteConfigProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -79,6 +80,11 @@ export default function RootLayout({
     telephone: siteConfig.phone,
     email: siteConfig.email,
     url: "https://aigana.com",
+    sameAs: [
+      siteConfig.socialLinks.facebook,
+      siteConfig.socialLinks.instagram,
+      siteConfig.socialLinks.tiktok,
+    ],
     areaServed: "Abuja",
     description: siteConfig.tagline,
     openingHours: "Mo-Sa 09:00-18:00",
@@ -96,7 +102,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-bg text-ink font-body antialiased">
-        <PublicLayout>{children}</PublicLayout>
+        <SiteConfigProvider>
+          <PublicLayout>{children}</PublicLayout>
+        </SiteConfigProvider>
       </body>
     </html>
   );

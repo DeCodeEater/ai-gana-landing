@@ -3,6 +3,7 @@ export interface SiteConfig {
   fullName: string;
   role: string;
   profileImage: string;
+  aboutImage: string;
   tagline: string;
   heroGreeting: string;
   heroSubtext: string;
@@ -46,6 +47,7 @@ export const siteConfig: SiteConfig = {
   fullName: "Abdullahi Idris Gana",
   role: "Real Estate Agent . Abuja",
   profileImage: "/images/me.png",
+  aboutImage: "/images/ai_gana_balcony.png",
   tagline: "I help people find homes and investment opportunities in Abuja without making the process stressful.",
   heroGreeting: "👋 Hi, I'm Abdullahi Idris Gana.",
   heroSubtext: "Most people know me as AI GANA.",
@@ -59,9 +61,9 @@ export const siteConfig: SiteConfig = {
   responseTime: "Usually replies within an hour",
   friendlyNote: "Even if you're just exploring your options, I'm happy to point you in the right direction.",
   socialLinks: {
-    facebook: "https://facebook.com",
-    instagram: "https://instagram.com",
-    tiktok: "https://tiktok.com",
+    facebook: "https://web.facebook.com/AiganaOfficial",
+    instagram: "https://www.instagram.com/aiganaofficial/?__pwa=1",
+    tiktok: "https://www.tiktok.com/@aiganaofficial?lang=en",
   },
   originStory: {
     title: "I believe real estate should feel simple.",

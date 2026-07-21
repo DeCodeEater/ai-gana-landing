@@ -5,7 +5,7 @@ import { Phone } from "lucide-react";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { siteConfig } from "@/lib/config";
 
-export const StickyCtaBar: React.FC = () => {
+export const StickyCtaBarMobile: React.FC = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

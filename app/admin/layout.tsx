@@ -11,6 +11,7 @@ import {
   Building2,
   MessageSquare,
   Users,
+  Settings,
   ExternalLink,
   LogOut,
   Menu,
@@ -66,6 +67,7 @@ export default function AdminLayout({
     { name: "Properties", href: "/admin/properties", icon: Building2, exact: false },
     { name: "Testimonials", href: "/admin/testimonials", icon: MessageSquare, exact: false },
     { name: "Leads", href: "/admin/leads", icon: Users, exact: false },
+    { name: "Settings", href: "/admin/settings", icon: Settings, exact: false },
   ];
 
   const isActive = (item: typeof navItems[0]) => {

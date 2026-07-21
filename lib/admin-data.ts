@@ -4,6 +4,7 @@ import {
   getDoc,
   doc,
   addDoc,
+  setDoc,
   updateDoc,
   deleteDoc,
   query,
@@ -15,6 +16,7 @@ import {
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "./firebase";
 import type { Property, Testimonial, Lead } from "./data";
+import type { SiteConfig } from "./config";
 
 // ─── Properties CRUD ─────────────────────────────────────────────
 
@@ -137,4 +139,33 @@ export async function getLeads(): Promise<Lead[]> {
     console.error("Error fetching leads:", error);
     return [];
   }
+}
+
+// ─── Site Settings & Assets ──────────────────────────────────────
+
+export async function uploadSiteImage(file: File, assetName: string): Promise<string> {
+  const fileExt = file.name.split(".").pop() || "jpg";
+  const fileName = `site_assets/${assetName}_${Date.now()}.${fileExt}`;
+  const storageRef = ref(storage, fileName);
+  await uploadBytes(storageRef, file);
+  return getDownloadURL(storageRef);
+}
+
+export async function getSiteSettings(): Promise<Partial<SiteConfig> | null> {
+  try {
+    const docRef = doc(db, "site_settings", "general");
+    const snap = await getDoc(docRef);
+    if (!snap.exists()) return null;
+    return snap.data() as Partial<SiteConfig>;
+  } catch (error) {
+    console.error("Error fetching site settings:", error);
+    return null;
+  }
+}
+
+export async function updateSiteSettings(
+  data: Partial<SiteConfig>
+): Promise<void> {
+  const docRef = doc(db, "site_settings", "general");
+  await setDoc(docRef, data, { merge: true });
 }

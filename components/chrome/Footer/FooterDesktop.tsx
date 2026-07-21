@@ -25,21 +25,18 @@ const TikTokIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   </svg>
 );
 
-export const Footer: React.FC = () => {
+export const FooterDesktop: React.FC = () => {
   const { socialLinks } = siteConfig;
 
   return (
-    <footer className="relative bg-surface text-ink-soft pt-12 pb-24 sm:pb-14 border-t border-border overflow-hidden">
-      {/* Top Subtle Gradient Line */}
+    <footer className="relative bg-surface text-ink-soft pt-12 pb-14 border-t border-border overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent/5 via-accent/30 to-accent/5" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        
-        {/* Main Footer Content Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 pb-8 border-b border-border/80">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8 space-y-10">
+        <div className="grid grid-cols-12 gap-12 pb-8 border-b border-border/80">
           
-          {/* Column 1: Brand & Role (5 cols) */}
-          <div className="md:col-span-5 space-y-4">
+          {/* Brand */}
+          <div className="col-span-5 space-y-4">
             <div>
               <h3 className="font-display text-2xl font-bold text-ink tracking-tight">
                 {siteConfig.agentName}
@@ -58,8 +55,8 @@ export const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* Column 2: Direct Contact Info (4 cols) */}
-          <div className="md:col-span-4 space-y-3">
+          {/* Contact */}
+          <div className="col-span-4 space-y-3">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-ink">
               Direct Contact
             </h4>
@@ -81,7 +78,7 @@ export const Footer: React.FC = () => {
                 <span className="p-2 rounded-lg bg-bg border border-border text-accent group-hover:bg-accent-soft transition-colors">
                   <Mail className="w-4 h-4" />
                 </span>
-                <span className="truncate max-w-[220px] sm:max-w-none">{siteConfig.email}</span>
+                <span>{siteConfig.email}</span>
               </a>
 
               <div className="flex items-center gap-2.5 text-ink-soft">
@@ -93,8 +90,8 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Column 3: Navigation & Social (3 cols) */}
-          <div className="md:col-span-3 space-y-4">
+          {/* Nav & Social */}
+          <div className="col-span-3 space-y-4">
             <div>
               <h4 className="text-xs font-semibold uppercase tracking-wider text-ink mb-2.5">
                 Navigation
@@ -107,7 +104,7 @@ export const Footer: React.FC = () => {
                   How I Work
                 </a>
                 <a href="#contact" className="hover:text-accent transition-colors">
-                  Contact Idris
+                  Contact Me
                 </a>
               </nav>
             </div>
@@ -152,17 +149,16 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        {/* Bottom Copyright & Status */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-ink-soft">
+        {/* Bottom */}
+        <div className="flex flex-row items-center justify-between text-xs text-ink-soft">
           <p>
-            © {new Date().getFullYear()} {siteConfig.companyName}. Based in {siteConfig.officeLocation}.
+            © {new Date().getFullYear()} AI GANA • Abuja Realtor
           </p>
           <div className="flex items-center gap-2 text-ink-soft font-medium">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse-slow" />
             <span>{siteConfig.responseTime}</span>
           </div>
         </div>
-
       </div>
     </footer>
   );

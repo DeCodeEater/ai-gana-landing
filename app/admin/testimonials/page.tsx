@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   getAllTestimonials,
   createTestimonial,
@@ -30,19 +30,20 @@ export default function AdminTestimonialsPage() {
     published: true,
   });
 
-  useEffect(() => {
-    async function loadTestimonials() {
-      try {
-        const data = await getAllTestimonials();
-        setTestimonials(data);
-      } catch (error) {
-        console.error("Failed to load testimonials:", error);
-      } finally {
-        setLoading(false);
-      }
+  const loadTestimonials = useCallback(async () => {
+    try {
+      const data = await getAllTestimonials();
+      setTestimonials(data);
+    } catch (error) {
+      console.error("Failed to load testimonials:", error);
+    } finally {
+      setLoading(false);
     }
-    loadTestimonials();
   }, []);
+
+  useEffect(() => {
+    loadTestimonials();
+  }, [loadTestimonials]);
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
