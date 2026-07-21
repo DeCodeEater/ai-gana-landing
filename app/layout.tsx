@@ -89,8 +89,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${plusJakartaSans.variable} scroll-smooth`}>
       <head>
-        <link rel="icon" href={siteConfig.profileImage} type="image/png" />
-        <link rel="apple-touch-icon" href={siteConfig.profileImage} />
+        <link rel="icon" href={`${siteConfig.profileImage}?v=2`} type="image/png" />
+        <link rel="shortcut icon" href={`${siteConfig.profileImage}?v=2`} type="image/png" />
+        <link rel="apple-touch-icon" href={`${siteConfig.profileImage}?v=2`} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -23,10 +23,31 @@ import * as dotenv from "dotenv";
 import * as path from "node:path";
 import * as fs from "node:fs";
 
+import { siteConfig } from "../lib/config";
+
 // Load .env.local (for local builds; CI uses env vars directly)
 dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
 
 const DATA_DIR = path.resolve(process.cwd(), "data");
+
+function syncFavicon() {
+  const relPath = siteConfig.profileImage.startsWith("/")
+    ? siteConfig.profileImage.slice(1)
+    : siteConfig.profileImage;
+  const profileImgPath = path.resolve(process.cwd(), "public", relPath);
+  if (fs.existsSync(profileImgPath)) {
+    const targets = [
+      path.resolve(process.cwd(), "app", "favicon.ico"),
+      path.resolve(process.cwd(), "app", "icon.png"),
+      path.resolve(process.cwd(), "public", "favicon.ico"),
+      path.resolve(process.cwd(), "public", "icon.png"),
+    ];
+    for (const target of targets) {
+      fs.copyFileSync(profileImgPath, target);
+    }
+    console.log(`🖼️  Synced face favicon from ${siteConfig.profileImage} to icon assets.`);
+  }
+}
 
 interface StaticProperty {
   id: string;
@@ -159,6 +180,7 @@ function loadLocalFallback(): {
 
 async function main() {
   console.log("🔧 Generating static data for build...\n");
+  syncFavicon();
 
   let data = await fetchFromFirestore();
   if (!data) {
