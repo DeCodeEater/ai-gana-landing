@@ -9,6 +9,7 @@ import {
   orderBy,
   serverTimestamp,
   Timestamp,
+  QueryDocumentSnapshot,
 } from "firebase/firestore";
 import { db } from "./firebase";
 import type { Property, Testimonial, Lead } from "./data";
@@ -19,7 +20,7 @@ export async function getAllProperties(): Promise<Property[]> {
   try {
     const q = query(collection(db, "properties"), orderBy("sortOrder", "asc"));
     const snapshot = await getDocs(q);
-    return snapshot.docs.map((d) => ({
+    return snapshot.docs.map((d: QueryDocumentSnapshot) => ({
       id: d.id,
       ...d.data(),
     })) as Property[];
@@ -57,7 +58,7 @@ export async function getAllTestimonials(): Promise<Testimonial[]> {
   try {
     const q = query(collection(db, "testimonials"), orderBy("createdAt", "desc"));
     const snapshot = await getDocs(q);
-    return snapshot.docs.map((d) => ({
+    return snapshot.docs.map((d: QueryDocumentSnapshot) => ({
       id: d.id,
       ...d.data(),
     })) as Testimonial[];
@@ -95,7 +96,7 @@ export async function getLeads(): Promise<Lead[]> {
   try {
     const q = query(collection(db, "leads"), orderBy("timestamp", "desc"));
     const snapshot = await getDocs(q);
-    return snapshot.docs.map((d) => {
+    return snapshot.docs.map((d: QueryDocumentSnapshot) => {
       const data = d.data();
       return {
         id: d.id,

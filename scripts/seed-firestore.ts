@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 /**
  * One-time seed script: uploads existing JSON data to Firestore.
  *
@@ -11,8 +10,8 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import * as dotenv from "dotenv";
-import * as path from "path";
-import * as fs from "fs";
+import * as path from "node:path";
+import * as fs from "node:fs";
 
 // Load .env.local
 dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
