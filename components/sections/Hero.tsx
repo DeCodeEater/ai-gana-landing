@@ -27,7 +27,7 @@ export const Hero: React.FC = () => {
             <div className="w-[45%] sm:w-[40%] shrink-0 lg:hidden mt-2 sm:mt-4">
               <div className="relative w-full aspect-[3/4] rounded-tl-[40px] rounded-br-[40px] sm:rounded-tl-[80px] sm:rounded-br-[80px] overflow-hidden shadow-2xl border border-border">
                 <Image
-                  src="/images/me.png"
+                  src={siteConfig.profileImage}
                   alt={siteConfig.fullName}
                   fill
                   priority
@@ -52,7 +52,7 @@ export const Hero: React.FC = () => {
           <div className="hidden lg:block lg:col-span-5 relative lg:mt-8">
             <div className="relative w-full aspect-[4/5] lg:rounded-tl-[120px] lg:rounded-br-[120px] overflow-hidden shadow-2xl border border-border">
               <Image
-                src="/images/me.png"
+                src={siteConfig.profileImage}
                 alt={siteConfig.fullName}
                 fill
                 priority

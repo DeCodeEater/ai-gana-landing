@@ -24,7 +24,7 @@ export const Navbar: React.FC = () => {
         <Link href="/" aria-label="AI GANA Home" className="flex items-center gap-3">
           <div className="relative w-10 h-10 rounded-full overflow-hidden border border-border shrink-0 shadow-sm">
             <Image
-              src="/images/me.png"
+              src={siteConfig.profileImage}
               alt={siteConfig.agentName}
               fill
               sizes="40px"

@@ -22,6 +22,13 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://aigana.com"),
   title: `${siteConfig.agentName} – Real Estate Agent in Abuja | Find Homes & Rentals`,
   description: siteConfig.tagline,
+  icons: {
+    icon: [
+      { url: siteConfig.profileImage, type: "image/png" },
+    ],
+    shortcut: siteConfig.profileImage,
+    apple: siteConfig.profileImage,
+  },
   keywords: [
     "AI GANA",
     "Abdullahi Idris Gana",
@@ -39,7 +46,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.agentName,
     images: [
       {
-        url: "/images/me.png",
+        url: siteConfig.profileImage,
         width: 1200,
         height: 630,
         alt: `${siteConfig.agentName} - ${siteConfig.fullName}`,
@@ -52,7 +59,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteConfig.agentName} – Real Estate Agent in Abuja | Find Homes & Rentals`,
     description: siteConfig.tagline,
-    images: ["/images/me.png"],
+    images: [siteConfig.profileImage],
   },
 };
 
@@ -65,7 +72,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
     name: siteConfig.agentName,
-    image: "https://aigana.com/images/me.png",
+    image: siteConfig.profileImage,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Abuja",
@@ -82,6 +89,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${plusJakartaSans.variable} scroll-smooth`}>
       <head>
+        <link rel="icon" href={siteConfig.profileImage} type="image/png" />
+        <link rel="apple-touch-icon" href={siteConfig.profileImage} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
