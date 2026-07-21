@@ -1,6 +1,7 @@
 import {
   collection,
   getDocs,
+  getDoc,
   doc,
   addDoc,
   updateDoc,
@@ -11,23 +12,44 @@ import {
   Timestamp,
   QueryDocumentSnapshot,
 } from "firebase/firestore";
-import { db } from "./firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, storage } from "./firebase";
 import type { Property, Testimonial, Lead } from "./data";
 
 // ─── Properties CRUD ─────────────────────────────────────────────
 
 export async function getAllProperties(): Promise<Property[]> {
   try {
-    const q = query(collection(db, "properties"), orderBy("sortOrder", "asc"));
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map((d: QueryDocumentSnapshot) => ({
+    const snapshot = await getDocs(collection(db, "properties"));
+    const items = snapshot.docs.map((d: QueryDocumentSnapshot) => ({
       id: d.id,
       ...d.data(),
     })) as Property[];
+    return items.sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
   } catch (error) {
     console.error("Error fetching all properties:", error);
     return [];
   }
+}
+
+export async function getPropertyById(id: string): Promise<Property | null> {
+  try {
+    const docRef = doc(db, "properties", id);
+    const snap = await getDoc(docRef);
+    if (!snap.exists()) return null;
+    return { id: snap.id, ...snap.data() } as Property;
+  } catch (error) {
+    console.error("Error fetching property by id:", error);
+    return null;
+  }
+}
+
+export async function uploadPropertyImage(file: File): Promise<string> {
+  const fileExt = file.name.split(".").pop() || "jpg";
+  const fileName = `properties/${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${fileExt}`;
+  const storageRef = ref(storage, fileName);
+  await uploadBytes(storageRef, file);
+  return getDownloadURL(storageRef);
 }
 
 export async function createProperty(

@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/config";
-import { Navbar } from "@/components/chrome/Navbar";
-import { Footer } from "@/components/chrome/Footer";
-import { StickyCtaBar } from "@/components/chrome/StickyCtaBar";
+import { PublicLayout } from "@/components/chrome/PublicLayout";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -98,10 +96,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-bg text-ink font-body antialiased">
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Footer />
-        <StickyCtaBar />
+        <PublicLayout>{children}</PublicLayout>
       </body>
     </html>
   );

@@ -100,28 +100,28 @@ async function fetchFromFirestore(): Promise<{
     const db = getFirestore(app);
 
     // Fetch properties
-    const propsQuery = query(
-      collection(db, "properties"),
-      where("published", "==", true),
-      orderBy("sortOrder", "asc")
-    );
-    const propsSnap = await getDocs(propsQuery);
-    const properties: StaticProperty[] = propsSnap.docs.map((d) => {
-      const data = d.data();
-      return {
-        id: d.id,
-        title: data.title,
-        price: data.price,
-        location: data.location,
-        bedrooms: data.bedrooms,
-        bathrooms: data.bathrooms,
-        type: data.type,
-        purpose: data.purpose,
-        opinion: data.opinion || "",
-        imageUrl: data.imageUrl,
-        whatsappMessage: data.whatsappMessage,
-      };
-    });
+    const propsSnap = await getDocs(collection(db, "properties"));
+    const properties: StaticProperty[] = propsSnap.docs
+      .map((d) => {
+        const data = d.data();
+        return {
+          id: d.id,
+          title: data.title,
+          price: data.price,
+          location: data.location,
+          bedrooms: data.bedrooms,
+          bathrooms: data.bathrooms,
+          type: data.type,
+          purpose: data.purpose,
+          opinion: data.opinion || "",
+          imageUrl: data.imageUrl,
+          whatsappMessage: data.whatsappMessage,
+          published: data.published !== false,
+          sortOrder: data.sortOrder || 0,
+        };
+      })
+      .filter((p) => p.published)
+      .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
 
     // Fetch testimonials
     const testsQuery = query(

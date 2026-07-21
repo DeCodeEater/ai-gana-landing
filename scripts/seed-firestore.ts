@@ -8,7 +8,14 @@
  */
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  setDoc,
+} from "firebase/firestore";
 import * as dotenv from "dotenv";
 import * as path from "node:path";
 import * as fs from "node:fs";
@@ -40,15 +47,25 @@ const db = getFirestore(app);
 async function seed() {
   console.log("🔥 Seeding Firestore...\n");
 
+  // Purge existing properties
+  const existingProps = await getDocs(collection(db, "properties"));
+  if (!existingProps.empty) {
+    console.log(`🧹 Purging ${existingProps.size} existing property document(s)...`);
+    for (const d of existingProps.docs) {
+      await deleteDoc(doc(db, "properties", d.id));
+    }
+  }
+
   // ─── Properties ──────────────────────────────────────────────
   const propertiesPath = path.resolve(process.cwd(), "data/properties.json");
   const propertiesRaw = fs.readFileSync(propertiesPath, "utf-8");
   const properties = JSON.parse(propertiesRaw);
 
-  console.log(`📦 Seeding ${properties.length} properties...`);
+  console.log(`\n📦 Seeding ${properties.length} properties...`);
   for (let i = 0; i < properties.length; i++) {
     const prop = properties[i];
-    await addDoc(collection(db, "properties"), {
+    const docId = prop.id || `prop-${i + 1}`;
+    await setDoc(doc(db, "properties", docId), {
       title: prop.title,
       price: prop.price,
       location: prop.location,
@@ -63,7 +80,16 @@ async function seed() {
       sortOrder: i,
       createdAt: new Date(),
     });
-    console.log(`  ✅ ${prop.title}`);
+    console.log(`  ✅ [${docId}] ${prop.title}`);
+  }
+
+  // Purge existing testimonials
+  const existingTestimonials = await getDocs(collection(db, "testimonials"));
+  if (!existingTestimonials.empty) {
+    console.log(`\n🧹 Purging ${existingTestimonials.size} existing testimonial document(s)...`);
+    for (const d of existingTestimonials.docs) {
+      await deleteDoc(doc(db, "testimonials", d.id));
+    }
   }
 
   // ─── Testimonials ────────────────────────────────────────────
@@ -73,8 +99,10 @@ async function seed() {
 
   if (testimonials.length > 0) {
     console.log(`\n📦 Seeding ${testimonials.length} testimonials...`);
-    for (const test of testimonials) {
-      await addDoc(collection(db, "testimonials"), {
+    for (let i = 0; i < testimonials.length; i++) {
+      const test = testimonials[i];
+      const docId = test.id || `test-${i + 1}`;
+      await setDoc(doc(db, "testimonials", docId), {
         name: test.name,
         quote: test.quote,
         source: test.source,
@@ -82,7 +110,7 @@ async function seed() {
         published: true,
         createdAt: new Date(),
       });
-      console.log(`  ✅ ${test.name}`);
+      console.log(`  ✅ [${docId}] ${test.name}`);
     }
   } else {
     console.log("\n📦 No testimonials to seed (empty array).");

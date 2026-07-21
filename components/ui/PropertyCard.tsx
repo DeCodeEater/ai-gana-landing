@@ -78,7 +78,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, isActive =
             message={property.whatsappMessage}
             source={`property_${property.id}`}
             variant="primary"
-            className="w-full justify-center text-sm py-2.5 mt-3 sm:mt-4"
+            className="w-full justify-center text-sm py-2.5"
+            containerClassName="w-full mt-auto pt-2"
             propertyId={property.id}
             propertyTitle={property.title}
           >
