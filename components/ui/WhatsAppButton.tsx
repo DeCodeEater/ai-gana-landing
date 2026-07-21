@@ -7,6 +7,8 @@ import { siteConfig } from "@/lib/config";
 interface WhatsAppButtonProps {
   message?: string;
   source: string;
+  propertyId?: string;
+  propertyTitle?: string;
   className?: string;
   containerClassName?: string;
   variant?: "primary" | "secondary" | "outline" | "floating";
@@ -28,6 +30,8 @@ const WhatsAppIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
 export const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
   message,
   source,
+  propertyId,
+  propertyTitle,
   className = "",
   containerClassName = "",
   variant = "primary",
@@ -51,7 +55,7 @@ export const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
   };
 
   const handleClick = () => {
-    trackWhatsAppClick(source);
+    trackWhatsAppClick(source, propertyId, propertyTitle);
   };
 
   if (variant === "floating") {

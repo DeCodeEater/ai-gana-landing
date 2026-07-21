@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "aigana-real-estate-agent-abuja"
+  },
+  "targets": {
+    "aigana-real-estate-agent-abuja": {
+      "hosting": {
+        "app": [
+          "aigana-real-estate-agent-abuja"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

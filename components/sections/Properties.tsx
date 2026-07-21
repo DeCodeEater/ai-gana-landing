@@ -91,13 +91,7 @@ export const Properties: React.FC<PropertiesProps> = ({ properties }) => {
               let opacity = 1;
               let zIndex = 20;
 
-              if (offset === 0) {
-                // Current: centered, full height, on top
-                x = "0%";
-                cardHeight = "100%";
-                opacity = 1;
-                zIndex = 20;
-              } else if (offset === -1) {
+              if (offset === -1) {
                 // Previous: shifted left, shorter, behind, vertically centered
                 x = "-40%";
                 cardHeight = "72%";
@@ -174,9 +168,9 @@ export const Properties: React.FC<PropertiesProps> = ({ properties }) => {
 
           {/* Dots */}
           <div className="flex items-center gap-2">
-            {filteredProperties.map((_, idx) => (
+            {filteredProperties.map((prop, idx) => (
               <button
-                key={idx}
+                key={prop.id}
                 onClick={() => setActiveIndex(idx)}
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                   idx === activeIndex ? "bg-accent scale-125" : "bg-border hover:bg-ink-soft"

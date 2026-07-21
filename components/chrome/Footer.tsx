@@ -49,7 +49,7 @@ export const Footer: React.FC = () => {
               </p>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-accent-soft text-accent text-xs font-semibold mt-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-slow" />
-                Real Estate Agent &bull; Abuja
+                <span>Real Estate Agent &bull; Abuja</span>
               </div>
             </div>
             
