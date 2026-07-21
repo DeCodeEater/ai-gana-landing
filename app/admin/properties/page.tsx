@@ -25,18 +25,17 @@ export default function AdminPropertiesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState<string>("all");
 
-  async function loadProperties() {
-    try {
-      const data = await getAllProperties();
-      setProperties(data);
-    } catch (error) {
-      console.error("Failed to load properties:", error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   useEffect(() => {
+    async function loadProperties() {
+      try {
+        const data = await getAllProperties();
+        setProperties(data);
+      } catch (error) {
+        console.error("Failed to load properties:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
     loadProperties();
   }, []);
 

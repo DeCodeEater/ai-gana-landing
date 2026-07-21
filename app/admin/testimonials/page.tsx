@@ -30,18 +30,17 @@ export default function AdminTestimonialsPage() {
     published: true,
   });
 
-  async function loadTestimonials() {
-    try {
-      const data = await getAllTestimonials();
-      setTestimonials(data);
-    } catch (error) {
-      console.error("Failed to load testimonials:", error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   useEffect(() => {
+    async function loadTestimonials() {
+      try {
+        const data = await getAllTestimonials();
+        setTestimonials(data);
+      } catch (error) {
+        console.error("Failed to load testimonials:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
     loadTestimonials();
   }, []);
 
