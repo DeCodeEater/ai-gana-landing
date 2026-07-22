@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "Lint: ESLint Workspace",
+      "command": "npx eslint .",
+      "problemMatcher": "$eslint-stylish",
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared"
+      },
+      "group": "build"
+    },
+    {
+      "type": "shell",
+      "label": "Lint: TypeScript Type-check",
+      "command": "npx tsc --noEmit",
+      "problemMatcher": "$tsc",
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared"
+      },
+      "group": "build"
+    },
+    {
+      "type": "shell",
+      "label": "Lint: TypeScript Watch",
+      "command": "npx tsc --noEmit --watch",
+      "problemMatcher": "$tsc-watch",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared"
+      },
+      "group": "build"
+    }
+  ]
+}

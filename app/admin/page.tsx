@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { getAllProperties, getLeads } from "@/lib/admin-data";
 import type { Property, Lead } from "@/lib/data";
 import { useAuth } from "@/lib/auth";
@@ -194,10 +195,12 @@ export default function AdminDashboard() {
                   <div className="flex items-center gap-3.5 min-w-0">
                     <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-bg shrink-0 border border-border">
                       {property.imageUrl ? (
-                        <img
+                        <Image
                           src={property.imageUrl}
                           alt={property.title}
-                          className="w-full h-full object-cover"
+                          fill
+                          sizes="56px"
+                          className="object-cover"
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center text-ink-soft text-xs">No img</div>

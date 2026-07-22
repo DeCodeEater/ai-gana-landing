@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { createProperty, uploadPropertyImage } from "@/lib/admin-data";
 import {
@@ -65,7 +66,7 @@ export default function NewPropertyPage() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
     try {
@@ -114,10 +115,11 @@ export default function NewPropertyPage() {
           </h2>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+            <label htmlFor="title" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
               Property Title *
             </label>
             <input
+              id="title"
               type="text"
               name="title"
               required
@@ -130,10 +132,11 @@ export default function NewPropertyPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label htmlFor="price" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
                 Price *
               </label>
               <input
+                id="price"
                 type="text"
                 name="price"
                 required
@@ -145,10 +148,11 @@ export default function NewPropertyPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label htmlFor="location" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
                 Location / District *
               </label>
               <input
+                id="location"
                 type="text"
                 name="location"
                 required
@@ -162,10 +166,11 @@ export default function NewPropertyPage() {
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label htmlFor="bedrooms" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
                 Bedrooms
               </label>
               <input
+                id="bedrooms"
                 type="number"
                 name="bedrooms"
                 min="0"
@@ -176,10 +181,11 @@ export default function NewPropertyPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label htmlFor="bathrooms" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
                 Bathrooms
               </label>
               <input
+                id="bathrooms"
                 type="number"
                 name="bathrooms"
                 min="0"
@@ -190,10 +196,11 @@ export default function NewPropertyPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label htmlFor="purpose" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
                 Purpose
               </label>
               <select
+                id="purpose"
                 name="purpose"
                 value={formData.purpose}
                 onChange={handleChange}
@@ -205,10 +212,11 @@ export default function NewPropertyPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label htmlFor="type" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
                 Type
               </label>
               <select
+                id="type"
                 name="type"
                 value={formData.type}
                 onChange={handleChange}
@@ -234,10 +242,12 @@ export default function NewPropertyPage() {
             {/* Preview Box */}
             <div className="sm:col-span-5 relative aspect-[4/3] rounded-2xl overflow-hidden bg-bg border border-border shadow-inner flex items-center justify-center">
               {imagePreview ? (
-                <img
+                <Image
                   src={imagePreview}
                   alt="Property preview"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 640px) 100vw, 40vw"
+                  className="object-cover"
                 />
               ) : (
                 <span className="text-xs text-ink-soft">No image selected</span>
@@ -253,9 +263,9 @@ export default function NewPropertyPage() {
             {/* Upload Controls */}
             <div className="sm:col-span-7 space-y-4">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-2">
+                <span className="block text-xs font-semibold uppercase tracking-wider text-ink mb-2">
                   Upload Image File (Firebase Storage)
-                </label>
+                </span>
                 <label className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-border hover:border-accent rounded-xl cursor-pointer bg-bg hover:bg-accent-soft/30 transition-colors text-xs font-semibold text-ink-soft hover:text-accent">
                   <Upload className="w-4 h-4" />
                   <span>Choose Photo to Upload</span>
@@ -269,10 +279,11 @@ export default function NewPropertyPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-ink-soft mb-1">
+                <label htmlFor="imageUrl" className="block text-xs font-semibold uppercase tracking-wider text-ink-soft mb-1">
                   Or Paste Direct Image URL
                 </label>
                 <input
+                  id="imageUrl"
                   type="text"
                   name="imageUrl"
                   value={formData.imageUrl}
@@ -296,10 +307,11 @@ export default function NewPropertyPage() {
           </h2>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+            <label htmlFor="opinion" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
               Personal Agent Opinion / Note
             </label>
             <textarea
+              id="opinion"
               name="opinion"
               rows={2}
               value={formData.opinion}
@@ -310,10 +322,11 @@ export default function NewPropertyPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+            <label htmlFor="whatsappMessage" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
               Prefilled WhatsApp Inquiry Message
             </label>
             <input
+              id="whatsappMessage"
               type="text"
               name="whatsappMessage"
               value={formData.whatsappMessage}

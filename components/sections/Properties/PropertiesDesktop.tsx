@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Property } from "@/lib/data";
-import { getAllProperties } from "@/lib/admin-data";
 import { SectionContainer } from "@/components/ui/SectionContainer";
 import { PropertyCard } from "@/components/ui/PropertyCard";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
@@ -14,22 +13,9 @@ interface PropertiesProps {
 }
 
 export const PropertiesDesktop: React.FC<PropertiesProps> = ({ properties: initialProperties }) => {
-  const [properties, setProperties] = useState<Property[]>(initialProperties);
+  const [properties] = useState<Property[]>(initialProperties);
   const [activeFilter, setActiveFilter] = useState<string>("sale");
   const [activeIndex, setActiveIndex] = useState<number>(0);
-
-  useEffect(() => {
-    async function fetchFreshData() {
-      try {
-        const freshProps = await getAllProperties();
-        const publishedProps = freshProps.filter(p => p.published !== false);
-        setProperties(publishedProps);
-      } catch (error) {
-        console.error("Failed to fetch fresh properties:", error);
-      }
-    }
-    fetchFreshData();
-  }, []);
 
   const filterOptions = [
     { label: "Sale Listings", value: "sale" },

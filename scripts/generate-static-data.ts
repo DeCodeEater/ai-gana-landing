@@ -29,22 +29,32 @@ dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
 
 const DATA_DIR = path.resolve(process.cwd(), "data");
 
-function syncFavicon() {
+async function syncFavicon() {
   const relPath = siteConfig.profileImage.startsWith("/")
     ? siteConfig.profileImage.slice(1)
     : siteConfig.profileImage;
   const profileImgPath = path.resolve(process.cwd(), "public", relPath);
   if (fs.existsSync(profileImgPath)) {
-    const targets = [
-      path.resolve(process.cwd(), "app", "favicon.ico"),
-      path.resolve(process.cwd(), "app", "icon.png"),
-      path.resolve(process.cwd(), "public", "favicon.ico"),
-      path.resolve(process.cwd(), "public", "icon.png"),
-    ];
-    for (const target of targets) {
-      fs.copyFileSync(profileImgPath, target);
+    try {
+      const sharp = (await import("sharp")).default;
+      const meBuffer = fs.readFileSync(profileImgPath);
+      const icon32 = await sharp(meBuffer).resize(32, 32, { fit: "cover" }).png().toBuffer();
+      const icon192 = await sharp(meBuffer).resize(192, 192, { fit: "cover" }).png().toBuffer();
+
+      fs.writeFileSync(path.resolve(process.cwd(), "app", "favicon.ico"), icon32);
+      fs.writeFileSync(path.resolve(process.cwd(), "public", "favicon.ico"), icon32);
+      fs.writeFileSync(path.resolve(process.cwd(), "public", "icon.png"), icon192);
+
+      // Clean up any giant app/icon.png or app/icon.svg if present
+      const appIcon = path.resolve(process.cwd(), "app", "icon.png");
+      if (fs.existsSync(appIcon)) fs.unlinkSync(appIcon);
+      const appIconSvg = path.resolve(process.cwd(), "app", "icon.svg");
+      if (fs.existsSync(appIconSvg)) fs.unlinkSync(appIconSvg);
+
+      console.log(`🖼️  Synced optimized favicons (32x32: ${(icon32.length / 1024).toFixed(1)}KB).`);
+    } catch (err) {
+      console.warn("⚠️ Could not resize favicons with sharp:", err);
     }
-    console.log(`🖼️  Synced face favicon from ${siteConfig.profileImage} to icon assets.`);
   }
 }
 
@@ -150,7 +160,7 @@ async function fetchFromFirestore(): Promise<{
       `✅ Fetched ${properties.length} properties and ${testimonials.length} testimonials from Firestore.`
     );
     return { properties, testimonials };
-  } catch (error) {
+  } catch {
     console.log("ℹ️  Firestore fetch skipped or empty — using local default properties.");
     return null;
   }
@@ -178,12 +188,9 @@ function loadLocalFallback(): {
 
 async function main() {
   console.log("🔧 Generating static data for build...\n");
-  syncFavicon();
+  await syncFavicon();
 
-  let data = await fetchFromFirestore();
-  if (!data) {
-    data = loadLocalFallback();
-  }
+  const data = (await fetchFromFirestore()) ?? loadLocalFallback();
 
   // Write output files
   const propsOut = path.join(DATA_DIR, "static-props.json");

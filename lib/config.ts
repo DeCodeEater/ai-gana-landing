@@ -48,7 +48,7 @@ export const siteConfig: SiteConfig = {
   agentName: "AI GANA",
   fullName: "Abdullahi Idris Gana",
   role: "Real Estate Agent . Abuja",
-  profileImage: "/images/me.png",
+  profileImage: "/images/me.webp",
   aboutImage: "",
   tagline: "I help people find homes and investment opportunities in Abuja without making the process stressful.",
   heroGreeting: "👋 Hi, I'm Abdullahi Idris Gana.",

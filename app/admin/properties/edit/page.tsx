@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getPropertyById, updateProperty, uploadPropertyImage } from "@/lib/admin-data";
 import type { Property } from "@/lib/data";
@@ -103,7 +104,7 @@ function EditPropertyForm() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!id) return;
     setSubmitting(true);
@@ -166,10 +167,11 @@ function EditPropertyForm() {
           </h2>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+            <label htmlFor="title" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
               Property Title *
             </label>
             <input
+              id="title"
               type="text"
               name="title"
               required
@@ -182,10 +184,11 @@ function EditPropertyForm() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label htmlFor="price" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
                 Price *
               </label>
               <input
+                id="price"
                 type="text"
                 name="price"
                 required
@@ -197,10 +200,11 @@ function EditPropertyForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label htmlFor="location" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
                 Location / District *
               </label>
               <input
+                id="location"
                 type="text"
                 name="location"
                 required
@@ -214,10 +218,11 @@ function EditPropertyForm() {
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label htmlFor="bedrooms" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
                 Bedrooms
               </label>
               <input
+                id="bedrooms"
                 type="number"
                 name="bedrooms"
                 min="0"
@@ -228,10 +233,11 @@ function EditPropertyForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label htmlFor="bathrooms" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
                 Bathrooms
               </label>
               <input
+                id="bathrooms"
                 type="number"
                 name="bathrooms"
                 min="0"
@@ -242,10 +248,11 @@ function EditPropertyForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label htmlFor="purpose" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
                 Purpose
               </label>
               <select
+                id="purpose"
                 name="purpose"
                 value={formData.purpose}
                 onChange={handleChange}
@@ -257,10 +264,11 @@ function EditPropertyForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label htmlFor="type" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
                 Type
               </label>
               <select
+                id="type"
                 name="type"
                 value={formData.type}
                 onChange={handleChange}
@@ -285,10 +293,12 @@ function EditPropertyForm() {
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
             <div className="sm:col-span-5 relative aspect-[4/3] rounded-2xl overflow-hidden bg-bg border border-border shadow-inner flex items-center justify-center">
               {imagePreview ? (
-                <img
+                <Image
                   src={imagePreview}
                   alt="Property preview"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 640px) 100vw, 40vw"
+                  className="object-cover"
                 />
               ) : (
                 <span className="text-xs text-ink-soft">No image selected</span>
@@ -303,9 +313,9 @@ function EditPropertyForm() {
 
             <div className="sm:col-span-7 space-y-4">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-2">
+                <span className="block text-xs font-semibold uppercase tracking-wider text-ink mb-2">
                   Upload New Photo
-                </label>
+                </span>
                 <label className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-border hover:border-accent rounded-xl cursor-pointer bg-bg hover:bg-accent-soft/30 transition-colors text-xs font-semibold text-ink-soft hover:text-accent">
                   <Upload className="w-4 h-4" />
                   <span>Choose Photo to Upload</span>
@@ -319,10 +329,11 @@ function EditPropertyForm() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-ink-soft mb-1">
+                <label htmlFor="imageUrl" className="block text-xs font-semibold uppercase tracking-wider text-ink-soft mb-1">
                   Or Edit Image URL
                 </label>
                 <input
+                  id="imageUrl"
                   type="text"
                   name="imageUrl"
                   value={formData.imageUrl}
@@ -345,10 +356,11 @@ function EditPropertyForm() {
           </h2>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+            <label htmlFor="opinion" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
               Personal Agent Opinion / Note
             </label>
             <textarea
+              id="opinion"
               name="opinion"
               rows={2}
               value={formData.opinion}
@@ -358,10 +370,11 @@ function EditPropertyForm() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+            <label htmlFor="whatsappMessage" className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
               Prefilled WhatsApp Message
             </label>
             <input
+              id="whatsappMessage"
               type="text"
               name="whatsappMessage"
               value={formData.whatsappMessage}

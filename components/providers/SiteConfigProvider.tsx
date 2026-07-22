@@ -18,10 +18,11 @@ const SiteConfigContext = createContext<SiteConfigContextType>({
 
 export const SiteConfigProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [config, setConfig] = useState<SiteConfig>(defaultSiteConfig);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const fetchSettings = async () => {
     try {
+      setLoading(true);
       const dynamicSettings = await getSiteSettings();
       if (dynamicSettings) {
         setConfig((prev) => ({
@@ -47,39 +48,6 @@ export const SiteConfigProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    let isMounted = true;
-    getSiteSettings()
-      .then((dynamicSettings) => {
-        if (isMounted && dynamicSettings) {
-          setConfig((prev) => ({
-            ...prev,
-            ...dynamicSettings,
-            socialLinks: {
-              ...prev.socialLinks,
-              ...(dynamicSettings.socialLinks || {}),
-            },
-            originStory: {
-              ...prev.originStory,
-              ...(dynamicSettings.originStory || {}),
-            },
-            howIWork: {
-              ...prev.howIWork,
-              ...(dynamicSettings.howIWork || {}),
-            },
-          }));
-        }
-      })
-      .catch((err) => console.error("Failed to load dynamic site settings:", err))
-      .finally(() => {
-        if (isMounted) setLoading(false);
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
 
   return (
     <SiteConfigContext.Provider
