@@ -9,13 +9,13 @@ export const HeroDesktop: React.FC = () => {
   const { config } = useSiteConfig();
 
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-14 pb-20 bg-bg overflow-hidden">
+    <section className="relative min-h-[calc(100vh-5rem)] flex items-center pt-8 pb-16 bg-bg overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 w-full">
-        <div className="grid grid-cols-12 gap-16">
+        <div className="grid grid-cols-12 gap-x-16 gap-y-4 items-center">
           
           {/* Left Column: Title Typography */}
-          <div className="col-span-7 pt-8">
-            <h1 className="font-display text-6xl xl:text-[4.5rem] font-bold text-ink tracking-tight leading-[1.1] mb-8">
+          <div className="col-span-7">
+            <h1 className="font-display text-6xl xl:text-[4.5rem] font-bold text-ink tracking-tight leading-[1.1]">
               <span className="text-4xl xl:text-5xl block mb-2 font-medium text-ink-soft">Hi, I&apos;m</span>
               <span className="text-ink break-words block mb-2">{config.fullName}</span>
               <span className="italic font-light text-ink-soft text-4xl xl:text-5xl tracking-normal mt-4 block">
@@ -25,7 +25,7 @@ export const HeroDesktop: React.FC = () => {
           </div>
 
           {/* Right Column: Desktop Image */}
-          <div className="col-span-5 relative mt-8">
+          <div className="col-span-5 row-span-2 relative self-center">
             <div className="relative w-full aspect-[4/5] rounded-tl-[120px] rounded-br-[120px] overflow-hidden shadow-2xl border border-border">
               <Image
                 src={config.profileImage}
@@ -48,9 +48,27 @@ export const HeroDesktop: React.FC = () => {
             </div>
           </div>
 
-          {/* Bottom Left Column: Tagline, CTA, Quote */}
-          <div className="col-span-7 col-start-1 -mt-16">
-            <p className="text-ink-soft text-2xl leading-relaxed max-w-2xl mb-10 font-normal">
+          {/* Bottom Left Column: Tagline, CTA */}
+          <div className="col-span-7 col-start-1">
+            {/* Hook line */}
+            <p className="font-display text-3xl xl:text-4xl font-bold text-ink leading-snug max-w-2xl mb-6">
+              {config.heroHook}
+            </p>
+
+            {/* Path chips */}
+            <div className="flex flex-wrap gap-2.5 mb-6 max-w-2xl">
+              {config.heroPaths.map((path) => (
+                <span
+                  key={path}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-soft/60 border border-accent/20 text-ink text-sm font-medium"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                  {path}
+                </span>
+              ))}
+            </div>
+
+            <p className="text-ink-soft text-xl leading-relaxed max-w-2xl mb-8 font-normal">
               {config.heroTagline}
             </p>
 
@@ -61,7 +79,7 @@ export const HeroDesktop: React.FC = () => {
                   variant="primary"
                   className="px-10 py-4 text-lg font-medium rounded-full shadow-cta hover:-translate-y-0.5 transition-transform"
                 >
-                  What are you looking for?
+                  Tell me what you&apos;re looking for
                 </WhatsAppButton>
                 {/* Reassurance */}
                 <div className="flex items-center gap-2 text-sm text-ink-soft font-medium pl-4">
@@ -73,10 +91,6 @@ export const HeroDesktop: React.FC = () => {
                 </div>
               </div>
             </div>
-
-            <blockquote className="border-l-4 border-border pl-6 py-2 italic text-ink-soft font-normal text-xl leading-relaxed max-w-2xl mt-8">
-              &ldquo;{config.heroQuote}&rdquo;
-            </blockquote>
           </div>
           
         </div>

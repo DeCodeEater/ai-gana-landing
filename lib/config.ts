@@ -8,7 +8,9 @@ export interface SiteConfig {
   heroGreeting: string;
   heroSubtext: string;
   heroQuote: string;
+  heroHook: string;
   heroTagline: string;
+  heroPaths: string[];
   whatsappNumber: string;
   phone: string;
   email: string;
@@ -47,19 +49,25 @@ export const siteConfig: SiteConfig = {
   fullName: "Abdullahi Idris Gana",
   role: "Real Estate Agent . Abuja",
   profileImage: "/images/me.png",
-  aboutImage: "/images/ai_gana_balcony.png",
+  aboutImage: "",
   tagline: "I help people find homes and investment opportunities in Abuja without making the process stressful.",
   heroGreeting: "👋 Hi, I'm Abdullahi Idris Gana.",
   heroSubtext: "Most people know me as AI GANA.",
-  heroQuote: "My goal isn't to sell you the most expensive property. It's to help you make a decision you'll be happy with.",
-  heroTagline: "Whether you're renting your first apartment, upgrading to a bigger home, or looking for your next investment, I'll help you find the right property without pressure, confusion, or endless back and forth.",
+  heroQuote: "My goal isn't to sell you the most expensive property. It's to help you make a decision you'll still feel good about later.",
+  heroHook: "Finding the right property shouldn't feel this complicated.",
+  heroTagline: "Whatever you're looking for, I'll help you make sense of your options and find what actually fits your needs.",
+  heroPaths: [
+    "Renting your first apartment",
+    "Upgrading to a bigger home",
+    "Exploring property as an investment",
+  ],
   whatsappNumber: "2348149912055",
   phone: "+234 814 991 2055",
   email: "Abduallahi.Idris.gana@gmail.com",
   officeLocation: "Abuja, Nigeria",
   companyName: "AI GANA Real Estate",
   responseTime: "Usually replies within an hour",
-  friendlyNote: "Even if you're just exploring your options, I'm happy to point you in the right direction.",
+  friendlyNote: "You don't need to have everything figured out before you reach out. Tell me what you're looking for, what you're considering, or even what you're unsure about. I'll help you figure out the next step.",
   socialLinks: {
     facebook: "https://web.facebook.com/AiganaOfficial",
     instagram: "https://www.instagram.com/aiganaofficial/?__pwa=1",
@@ -77,24 +85,28 @@ export const siteConfig: SiteConfig = {
     calloutBody: "AI GANA comes from my name, Abdullahi Idris Gana. Over time, it became more than an abbreviation. To me, it means showing up prepared, communicating clearly, and helping people make confident property decisions. That's the standard I try to live up to every time someone messages me."
   },
   howIWork: {
-    badge: "What It's Like Working With Me",
-    subtitle: "Clear guidance. Honest advice. Better property decisions.",
-    philosophyQuote: "Before I recommend a property, I try to understand the person.",
-    philosophySubtext: "Buying or renting property in Abuja shouldn't feel exhausting.",
-    oldWayTitle: "The Usual Experience",
+    badge: "What it's like working with me",
+    subtitle: "Clear guidance. Honest advice. No unnecessary pressure.",
+    philosophyQuote: "Before I recommend a property, I want to understand the person looking for it.",
+    philosophySubtext: "Buying or renting a property in Abuja shouldn't feel like a guessing game.",
+    oldWayTitle: "Instead of...",
     oldWayBullets: [
-      "Endless calls & pushy follow-ups",
-      "Conflicting advice & hidden details",
-      "Pressure to make quick decisions"
+      "Pushing you toward the most expensive option",
+      "Sending endless listings",
+      "Giving you vague advice",
+      "Making you feel rushed",
+      "Disappearing after you enquire"
     ],
-    myWayTitle: "Working With AI GANA",
+    myWayTitle: "You'll get...",
     expectations: [
-      "I'll tell you when a property isn't worth your money.",
-      "You'll always know where things stand.",
-      "I'll never pressure you into buying."
+      "Recommendations based on what actually fits you",
+      "A shortlist that makes sense for your needs",
+      "Clear explanations, even when the answer isn't what you hoped for",
+      "Time to think through your decision",
+      "Someone who stays involved when you need help"
     ],
-    ctaTitle: "Tell me what you're looking for.",
-    ctaSubtext: "Even if you're just exploring options, I'm happy to point you in the right direction.",
-    ctaButtonText: "Chat with AI GANA"
+    ctaTitle: "Not sure where to start?",
+    ctaSubtext: "You don't need to have everything figured out before you reach out. Tell me what you're looking for, what you're considering, or what you're unsure about. I'll help you figure out the next step.",
+    ctaButtonText: "Chat with AI GANA on WhatsApp"
   }
 };

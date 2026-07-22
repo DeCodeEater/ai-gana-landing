@@ -20,7 +20,7 @@ import {
   Phone,
   Share2,
   Loader2,
-  RefreshCw,
+  Trash2,
 } from "lucide-react";
 
 export default function AdminSettingsPage() {
@@ -238,14 +238,32 @@ export default function AdminSettingsPage() {
                 About Me Section Photo
               </label>
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-bg shadow-inner flex items-center justify-center group">
-                <Image
-                  src={formData.aboutImage || "/images/ai_gana_balcony.png"}
-                  alt="About Me Photo Preview"
-                  fill
-                  className="object-cover"
-                />
+                {formData.aboutImage ? (
+                  <>
+                    <Image
+                      src={formData.aboutImage}
+                      alt="About Me Photo Preview"
+                      fill
+                      className="object-cover"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setFormData((prev) => ({ ...prev, aboutImage: "" }))}
+                      className="absolute top-3 right-3 p-2 rounded-xl bg-red-600 hover:bg-red-700 text-white shadow-md transition-colors z-10"
+                      title="Remove Photo"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </>
+                ) : (
+                  <div className="text-center p-6 space-y-2">
+                    <ImageIcon className="w-8 h-8 text-ink-soft mx-auto" />
+                    <p className="text-xs text-ink-soft font-medium">No photo uploaded</p>
+                    <p className="text-[10px] text-ink-soft/75">Will be hidden on the site</p>
+                  </div>
+                )}
                 {uploadingAbout && (
-                  <div className="absolute inset-0 bg-ink/50 backdrop-blur-xs flex flex-col items-center justify-center text-white gap-2">
+                  <div className="absolute inset-0 bg-ink/50 backdrop-blur-xs flex flex-col items-center justify-center text-white gap-2 z-20">
                     <Loader2 className="w-6 h-6 animate-spin" />
                     <span className="text-xs font-medium">Uploading...</span>
                   </div>

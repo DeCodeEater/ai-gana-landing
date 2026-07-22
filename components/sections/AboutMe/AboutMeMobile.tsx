@@ -84,26 +84,28 @@ export const AboutMeMobile: React.FC = () => {
           </div>
 
           {/* Photo Card */}
-          <div className="w-full">
-            <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-hover border border-border">
-              <Image
-                src={config.aboutImage || "/images/ai_gana_balcony.png"}
-                alt={`${config.fullName} at a property in Abuja`}
-                fill
-                sizes="90vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-surface/90 backdrop-blur-md border border-white/20">
-                <p className="font-display font-semibold text-ink text-xs">
-                  {config.fullName}
-                </p>
-                <p className="text-[10px] text-ink-soft">
-                  {config.role}
-                </p>
+          {config.aboutImage && (
+            <div className="w-full">
+              <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-hover border border-border">
+                <Image
+                  src={config.aboutImage}
+                  alt={`${config.fullName} at a property in Abuja`}
+                  fill
+                  sizes="90vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-surface/90 backdrop-blur-md border border-white/20">
+                  <p className="font-display font-semibold text-ink text-xs">
+                    {config.fullName}
+                  </p>
+                  <p className="text-[10px] text-ink-soft">
+                    {config.role}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
         </div>
       </div>

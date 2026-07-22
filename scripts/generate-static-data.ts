@@ -17,7 +17,6 @@ import {
   getDocs,
   query,
   where,
-  orderBy,
 } from "firebase/firestore";
 import * as dotenv from "dotenv";
 import * as path from "node:path";
@@ -142,7 +141,7 @@ async function fetchFromFirestore(): Promise<{
 
     if (properties.length === 0 && testimonials.length === 0) {
       console.log(
-        "⚠️  Firestore returned 0 properties and 0 testimonials — falling back to local JSON."
+        "ℹ️  Firestore currently has 0 properties/testimonials — using local default properties."
       );
       return null;
     }
@@ -152,8 +151,7 @@ async function fetchFromFirestore(): Promise<{
     );
     return { properties, testimonials };
   } catch (error) {
-    console.error("⚠️  Firestore fetch failed — falling back to local JSON.");
-    console.error("   Error:", (error as Error).message);
+    console.log("ℹ️  Firestore fetch skipped or empty — using local default properties.");
     return null;
   }
 }

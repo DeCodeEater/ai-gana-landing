@@ -42,8 +42,20 @@ export default function AdminTestimonialsPage() {
   }, []);
 
   useEffect(() => {
-    loadTestimonials();
-  }, [loadTestimonials]);
+    let isMounted = true;
+    getAllTestimonials()
+      .then((data) => {
+        if (isMounted) setTestimonials(data);
+      })
+      .catch((error) => console.error("Failed to load testimonials:", error))
+      .finally(() => {
+        if (isMounted) setLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -53,10 +53,10 @@ export const PropertiesDesktop: React.FC<PropertiesProps> = ({ properties: initi
       <div className="flex flex-row items-end justify-between gap-6 mb-10">
         <div>
           <h2 className="font-display text-4xl font-bold text-ink tracking-tight">
-            A Few Places You Might Like
+            A few properties worth seeing
           </h2>
           <p className="text-ink-soft mt-2 text-lg max-w-xl">
-            A snapshot of current opportunities available in Abuja. Tap cards to explore, then tap WhatsApp to inquire.
+            Browse a few properties I&apos;ve selected. If something catches your eye, I&apos;ll help you take the next step.
           </p>
         </div>
 
@@ -98,10 +98,10 @@ export const PropertiesDesktop: React.FC<PropertiesProps> = ({ properties: initi
           </div>
           <div className="space-y-2">
             <h3 className="font-display font-bold text-ink text-2xl">
-              No properties listed in this category right now
+              Nothing here that fits right now
             </h3>
             <p className="text-ink-soft text-base leading-relaxed max-w-lg mx-auto">
-              Looking for something specific in Abuja? I often have upcoming or off-market listings before they are published here.
+              I&apos;m always updating my listings, and the right property may not be published yet. Tell me what you&apos;re looking for and I&apos;ll help you find it.
             </p>
           </div>
           <div className="pt-2 flex justify-center">

@@ -9,26 +9,26 @@ export const HeroMobile: React.FC = () => {
   const { config } = useSiteConfig();
 
   return (
-    <section className="relative min-h-[85vh] flex items-center pt-6 pb-12 bg-bg overflow-hidden">
-      <div className="max-w-xl mx-auto px-4 w-full mt-4">
+    <section className="relative min-h-[calc(100svh-5rem)] flex flex-col justify-center pt-6 pb-10 bg-bg overflow-hidden">
+      <div className="max-w-xl mx-auto px-4 w-full">
         
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-5">
           
           {/* Top Row for Mobile (Title + Image side by side) */}
           <div className="flex flex-row items-start justify-between gap-4">
             {/* Typography Content - Title */}
             <div className="flex-1">
-              <h1 className="font-display text-4xl sm:text-5xl font-bold text-ink tracking-tight leading-[1.1] mb-4">
-                <span className="text-2xl sm:text-3xl block mb-2 font-medium text-ink-soft">Hi, I&apos;m</span>
-                <span className="text-ink break-words block mb-2">{config.fullName}</span>
-                <span className="italic font-light text-ink-soft text-xl sm:text-3xl tracking-normal mt-2 block">
+              <h1 className="font-display text-3xl sm:text-5xl font-bold text-ink tracking-tight leading-[1.1]">
+                <span className="text-xl sm:text-3xl block mb-1 font-medium text-ink-soft">Hi, I&apos;m</span>
+                <span className="text-ink break-words block mb-1">{config.fullName}</span>
+                <span className="italic font-light text-ink-soft text-lg sm:text-3xl tracking-normal block">
                   mostly known as <span className="font-bold text-accent not-italic">{config.agentName}</span>.
                 </span>
               </h1>
             </div>
 
             {/* Mobile/Tablet Image */}
-            <div className="w-[45%] sm:w-[40%] shrink-0 mt-2">
+            <div className="w-[42%] sm:w-[40%] shrink-0 mt-1">
               <div className="relative w-full aspect-[3/4] rounded-tl-[40px] rounded-br-[40px] sm:rounded-tl-[60px] sm:rounded-br-[60px] overflow-hidden shadow-2xl border border-border">
                 <Image
                   src={config.profileImage}
@@ -52,20 +52,38 @@ export const HeroMobile: React.FC = () => {
             </div>
           </div>
 
+          {/* Hook line */}
+          <p className="font-display text-xl sm:text-3xl font-bold text-ink leading-snug">
+            {config.heroHook}
+          </p>
+
+          {/* Path chips */}
+          <div className="flex flex-wrap gap-1.5">
+            {config.heroPaths.map((path) => (
+              <span
+                key={path}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent-soft/60 border border-accent/20 text-ink text-[11px] font-medium"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                {path}
+              </span>
+            ))}
+          </div>
+
           {/* Tagline Paragraph */}
-          <p className="text-ink-soft text-base sm:text-xl leading-relaxed mb-4 font-normal">
+          <p className="text-ink-soft text-sm sm:text-lg leading-relaxed font-normal">
             {config.heroTagline}
           </p>
 
           {/* CTA Button & Reassurance */}
-          <div className="flex flex-col items-center gap-3 w-full">
+          <div className="flex flex-col items-center gap-2 w-full">
             <WhatsAppButton
               source="hero_primary"
               variant="primary"
               className="px-8 py-3.5 text-base font-medium rounded-full justify-center w-full shadow-cta"
               containerClassName="w-full"
             >
-              What are you looking for?
+              Tell me what you&apos;re looking for
             </WhatsAppButton>
             
             {/* Reassurance */}
@@ -77,11 +95,6 @@ export const HeroMobile: React.FC = () => {
               {config.responseTime}
             </div>
           </div>
-
-          {/* Quote */}
-          <blockquote className="border-l-4 border-border pl-4 py-2 italic text-ink-soft font-normal text-base leading-relaxed mt-4">
-            &ldquo;{config.heroQuote}&rdquo;
-          </blockquote>
           
         </div>
 

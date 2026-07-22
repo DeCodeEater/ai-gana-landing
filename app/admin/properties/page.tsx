@@ -15,8 +15,6 @@ import {
   Bed,
   Bath,
   MapPin,
-  Tag,
-  CheckCircle2,
 } from "lucide-react";
 
 export default function AdminPropertiesPage() {

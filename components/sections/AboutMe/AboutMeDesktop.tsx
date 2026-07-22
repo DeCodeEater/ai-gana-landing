@@ -84,26 +84,28 @@ export const AboutMeDesktop: React.FC = () => {
           </div>
 
           {/* Photo Card */}
-          <div className="max-w-sm mx-auto">
-            <div className="relative w-full aspect-[3/4] rounded-[28px] overflow-hidden shadow-hover border border-border group">
-              <Image
-                src={config.aboutImage || "/images/ai_gana_balcony.png"}
-                alt={`${config.fullName} at a property in Abuja`}
-                fill
-                sizes="384px"
-                className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-surface/90 backdrop-blur-md border border-white/20 shadow-resting">
-                <p className="font-display font-semibold text-ink text-sm">
-                  {config.fullName}
-                </p>
-                <p className="text-xs text-ink-soft">
-                  {config.role}
-                </p>
+          {config.aboutImage && (
+            <div className="max-w-sm mx-auto">
+              <div className="relative w-full aspect-[3/4] rounded-[28px] overflow-hidden shadow-hover border border-border group">
+                <Image
+                  src={config.aboutImage}
+                  alt={`${config.fullName} at a property in Abuja`}
+                  fill
+                  sizes="384px"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-surface/90 backdrop-blur-md border border-white/20 shadow-resting">
+                  <p className="font-display font-semibold text-ink text-sm">
+                    {config.fullName}
+                  </p>
+                  <p className="text-xs text-ink-soft">
+                    {config.role}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
         </div>
       </div>

@@ -11,7 +11,7 @@ export const LetsTalkDesktop: React.FC = () => {
         
         <div className="space-y-3">
           <h2 className="font-display text-5xl font-bold tracking-tight text-ink">
-            Tell me what you&apos;re looking for.
+            Not sure where to start?
           </h2>
           <p className="text-lg text-ink-soft max-w-xl mx-auto leading-relaxed">
             {siteConfig.friendlyNote}
